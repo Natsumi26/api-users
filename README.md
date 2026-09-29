@@ -1,8 +1,8 @@
 # API Users
 
-API REST développée avec **Spring Boot** permettant de gérer les utilisateurs de l'application https://github.com/Natsumi26/API_square-game.
+API REST développée avec **Spring Boot** permettant de gérer les utilisateurs d'application (utilisé notamment pour https://github.com/Natsumi26/API_square-game et https://github.com/Natsumi26/TrailTrack-api .
 
-Cette API est utilisée en complément de l'API Games. Elle permet notamment à l'API Games de vérifier qu'un utilisateur existe avant de lui permettre d'accéder aux fonctionnalités de jeu.
+Cette API est utilisée en complément d'autre API. Elle permet notamment de vérifier qu'un utilisateur existe avant de lui permettre d'accéder aux fonctionnalités.
 
 ---
 
@@ -75,16 +75,16 @@ Avant de lancer le projet, installer :
 
 ## 🗄️ Base de données
 
-L'application utilise une base de données **MySQL** de l'API Games (https://github.com/Natsumi26/API_square-game).
+L'application utilise une base de données **MySQL**.
 
-La base de données est gérée sur l'API games et doit être lancée avant de lancer API users.
+La base de données est gérée sur l'API tiers et doit être lancée avant de lancer API users.
 
 
 ---
 
 ## 🔧 Configuration
 
-L'API Users utilise le port **8081** afin de pouvoir fonctionner en parallèle de l'API Games qui utilise le port **8080**.
+L'API Users utilise le port **8081** afin de pouvoir fonctionner en parallèle de l'API tiers qui utilise le port **8080**.
 
 Exemple de configuration :
 
@@ -97,7 +97,7 @@ La clé secrète JWT est configurée dans `application-local.properties` :
 jwt.secret=VOTRE_SECRET
 ```
 
-Cette clé doit être **strictement identique** à celle configurée dans l'API Games.
+Cette clé doit être **strictement identique** à celle configurée dans l'API tiers.
 
 ⚠️ Ne pas versionner une vraie clé secrète dans Git.
 
@@ -118,7 +118,7 @@ spring.jpa.show-sql=true
 
 ## ▶️ Lancer l'application
 
-### 1. Démarrer MySQL (API GAMES)
+### 1. Démarrer MySQL (API tiers)
 
 ```bash
 docker compose up -d
@@ -290,7 +290,7 @@ Pour l'accès à son propre profil :
 @PreAuthorize("hasRole('ADMIN') or (hasRole('USER') and #id == authentication.principal.id)")
 ```
 
-## Communication avec l'API Games
+## Communication avec l'API tiers
 
 L'API Users fournit le JWT.
 
@@ -304,11 +304,11 @@ Client ◀───────────────────────�
    API Games
 ```
 
-Les deux APIs utilisent la même clé secrète JWT afin que l'API Games puisse vérifier localement les tokens générés par l'API Users.
+Les deux APIs utilisent la même clé secrète JWT afin que l'API tiers puisse vérifier localement les tokens générés par l'API Users.
 
-L'API Games récupère directement le `userId` contenu dans le JWT.
+L'API tiesr récupère directement le `userId` contenu dans le JWT.
 
-Il n'est donc plus nécessaire de contacter l'API Users pour chaque requête Games.
+Il n'est donc plus nécessaire de contacter l'API Users pour chaque requête tiers.
 
 ## Swagger / OpenAPI
 
