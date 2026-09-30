@@ -57,8 +57,7 @@ API Users
 │
 └── resources
     ├── application.properties 
-    ├── application-local.properties (Dans le gitIgnore : concerne les données sensibles de clés JWT)
-    └── application-mysql.properties (Dans le gitIgnore : concerne les données sensibles d'accès à la BDD)
+    └──application-local.properties (Dans le gitIgnore : concerne les données sensibles de clés JWT et bdd)
 ```
 
 ---
@@ -101,7 +100,7 @@ Cette clé doit être **strictement identique** à celle configurée dans l'API 
 
 ⚠️ Ne pas versionner une vraie clé secrète dans Git.
 
-Les informations de connexion à la base de données sont définies dans `application-mysql.properties` :
+Les informations de connexion à la base de données sont définies dans `application-local.properties` :
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:<port>/<nom-database>
